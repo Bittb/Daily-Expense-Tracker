@@ -1,0 +1,25 @@
+USE expenses_db;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(128) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS incomes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    amount FLOAT,
+    date DATE,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS expenses (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    description TEXT,
+    amount FLOAT,
+    date DATE,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
